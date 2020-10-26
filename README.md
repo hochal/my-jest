@@ -3,19 +3,20 @@
 > 
 > `"Delightful Javascript Testing"`
 > 
-[공식 사이트](https://jestjs.io/)
+> [공식 사이트](https://jestjs.io/)
 
 ## Getting Started
 
 - 설치
 ```console
 $ npm run i -D jest
-
 ```
+
 - Babel 설정
 ```console
 $ yarn add --dev babel-jest @babel/core @babel/preset-env
 ```
+
 ```js
 // babel.config.js
 module.exports = {
@@ -68,7 +69,7 @@ toContainEqual(arrayItemObject); // array에 object item이 속할 때 (key-valu
 not.toXxx(); // 부정
 
 const testTarget = null;
-expect(testTarget).toThrow()l
+expect(testTarget).toThrow();
 // 위 경우 testTarget은 함수여야합니다.
 ```
 
@@ -121,7 +122,7 @@ afterEach(fn, timeout)
 
 ## 비동기 처리
 
-- Timer API
+- setTimeout
 ```js
 function fetchUser(id, cb) {
   setTimeout(() => {
@@ -184,8 +185,9 @@ test('fetch a user', (done) => {
     - mock object 생성을 지원
     - 테스트 실행하는 동안 mock object 에 발생한 일들을 기억
 
-### Mock Functions
-jest.fn() 
+## Mock Functions
+
+### jest.fn() 
 - 가짜 함수 생성
 
 ```js
@@ -222,7 +224,7 @@ test('register sends messeges', () => {
 ```
 
 - 위 코드는 모듈의 함수를 일일이 jest.fn()으로 모킹한다.
-- 아래 코드는 jest.mock()을 사용하여 모듈을 모킹한다.
+- 아래 코드는 jest.mock()을 사용하여 **모듈을 전체 모킹**하여 필요한 함수만 사용한다.
   
 ```js
 import { sendEmail, sendSMS } from "./messageService"
@@ -236,8 +238,8 @@ beforeEach(() => {
 })
 ```
 
-jest.spyOn(object, methodName)
-- 가짜 함수로 대체하지 않고, 특정 함수가 어떻게 호출되었는지를 확인한다.
+### jest.spyOn(object, methodName)
+- 가짜 함수로 대체하지 않고, **특정 함수**가 어떻게 호출되었는지를 확인한다.
   
 ```js
 const calculator = {
@@ -256,7 +258,7 @@ expect(result).toBe(5)
 ## test 실패하는 경우..
 ```js
 /*
-1. parameter를 사용하지 않을 때 에러 발생
+parameter를 사용하지 않을 때 에러 발생
 => 나머지연산자를 사용하여 ...notUsedParams로 받으면 에러 발생 안함.
 
 : Timeout - Async callback was not invoked within the 5000 ms timeout specified by jest.setTimeout.Timeout - Async callback was not invoked within the 5000 ms timeout specified by jest.setTimeout.Error:
